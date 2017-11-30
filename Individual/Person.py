@@ -51,6 +51,6 @@ class Person:
         self.hairColor = hairColor
 
     def __str__(self):
-        return self.name + ", " + self.race + ", " + self.parents + ", " + self.sexualPreference + ", " + self.sex + \
-               ", " + self.height + ", " + self.weight + ", " + self.fatPercentage + ", " + self.skinTone + ", " \
-               + self.hairColor
+        return self.name + ", " + str(self.race) + ", " + self.parents + ", " + str(self.sexualPreference) + ", " + str(self.sex) + \
+               ", " + str(self.height) + ", " + str(self.weight) + ", " + str(self.fatPercentage) + ", " + str(self.skinTone) + ", " \
+               + str(self.hairColor)

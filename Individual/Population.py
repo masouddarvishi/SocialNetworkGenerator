@@ -1,6 +1,5 @@
 import secrets
-
-from numpy import random
+import random
 
 from Individual.Person import *
 
@@ -15,23 +14,23 @@ class Population:
     def createRandomPopulation(self):
         """ Creates a random population of 100 people"""
         for p in range(0, 100):
-            name = secrets.token_hex(15)
+            name = secrets.token_hex(5)
             race = random.choice(list(Race))
             sexualPreference = random.choice(list(SexualPreference))
             sex = random.choice(list(Sex))
-            height = random.choice(110, 200)
-            weight = random.choice(50, 150)
-            fatpercentage = random.choice(1, 40)
+            height = random.choice([n for n in range(110, 200)])
+            weight = random.choice([n for n in range(50, 150)])
+            fatpercentage = random.choice([n for n in range(1, 40)])
             skinTone = random.choice(list(SkinTone))
             hairColor = random.choice(list(HairColor))
 
-            newPerson = Person(name, race, [], sexualPreference, sex, height, weight, fatpercentage, skinTone,
+            newPerson = Person(name, race, "empty", sexualPreference, sex, height, weight, fatpercentage, skinTone,
                                hairColor)
             self.population.append(newPerson)
 
     def printPopulation(self):
-        return
-        # print(self.population)
+        for p in self.population:
+            print(p)
 
     def calculateFitness(self):
         return 0
