@@ -1,11 +1,9 @@
-from Individual.Population import Population
+from AlgGenetic.GeneticAlgorithm import GeneticAlgorithm
 
 
-def initiatePopulation():
-    pop = Population()
-    pop.createRandomPopulation()
-    pop.printPopulation()
-
+def initiateGeneticPopulation():
+    galg = GeneticAlgorithm()
+    galg.print()
 
 if __name__ == "__main__":
-    initiatePopulation()
+    initiateGeneticPopulation()

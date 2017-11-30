@@ -8,12 +8,13 @@ class Population:
     """Class that contains all the people from a city"""
 
     def __init__(self):
-        self.population = []
+        self.group = []
         self.fitness = 0
+
 
     def createRandomPopulation(self):
         """ Creates a random population of 100 people"""
-        for p in range(0, 100):
+        for p in range(0, 300):
             name = secrets.token_hex(5)
             race = random.choice(list(Race))
             sexualPreference = random.choice(list(SexualPreference))
@@ -26,11 +27,13 @@ class Population:
 
             newPerson = Person(name, race, "empty", sexualPreference, sex, height, weight, fatpercentage, skinTone,
                                hairColor)
-            self.population.append(newPerson)
+            self.group.append(newPerson)
 
-    def printPopulation(self):
-        for p in self.population:
-            print(p)
+    def __str__(self):
+        stringToReturn = ''
+        for p in self.group:
+            stringToReturn += str(p) + '\n'
+        return stringToReturn
 
     def calculateFitness(self):
         return 0
