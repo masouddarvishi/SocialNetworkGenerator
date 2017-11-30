@@ -11,7 +11,6 @@ class Population:
         self.group = []
         self.fitness = 0
 
-
     def createRandomPopulation(self):
         """ Creates a random population of 100 people"""
         for p in range(0, 300):
