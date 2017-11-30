@@ -1,6 +1,7 @@
 import secrets
 import random
 
+import Utils.Utils
 from Individual.Person import *
 
 
@@ -10,6 +11,7 @@ class Population:
     def __init__(self):
         self.group = []
         self.fitness = 0
+        self.statisticalObject = Utils.Utils.decode_json("data.json")
 
     def createRandomPopulation(self):
         """ Creates a random population of 100 people"""
