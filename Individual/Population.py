@@ -1,7 +1,7 @@
 import secrets
 import random
 
-import Utils.Utils
+from Utils.Utils import JsonData
 from Individual.Person import *
 
 
@@ -11,7 +11,7 @@ class Population:
     def __init__(self):
         self.group = []
         self.fitness = 0
-        self.statisticalObject = Utils.Utils.decode_json("data.json")
+        self.statisticalObject = JsonData("data.json")
 
     def createRandomPopulation(self):
         """ Creates a random population of 100 people"""
@@ -30,11 +30,20 @@ class Population:
                                hairColor)
             self.group.append(newPerson)
 
+        print(self.calculate_fitness())
+
     def __str__(self):
         stringToReturn = ''
         for p in self.group:
             stringToReturn += str(p) + '\n'
         return stringToReturn
 
-    def calculateFitness(self):
-        return 0
+    def calculate_fitness(self):
+
+        number_of_people_from_race = [0] * len(self.statisticalObject.races)
+
+        for person in self.group:
+            number_of_people_from_race[person.race.value - 1] += 1
+
+
+        return number_of_people_from_race[1]

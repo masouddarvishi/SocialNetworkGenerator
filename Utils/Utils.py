@@ -1,7 +1,10 @@
 import json
 
 
-def decode_json(file_url):
-    """ Receives a file url and return a Json object"""
-    data = json.load(open(file_url, 'r'))
-    print(data)
+class JsonData:
+    """ Class that holds the stats read in the file"""
+
+    def __init__(self, file_url):
+        file = open(file_url, 'r')
+        data = json.load(file)
+        self.__dict__ = data
