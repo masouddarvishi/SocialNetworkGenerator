@@ -18,17 +18,17 @@ class Population:
         for p in range(0, 300):
             name = secrets.token_hex(5)
             race = random.choice(list(Race))
-            sexualPreference = random.choice(list(SexualPreference))
+            sexual_preference = random.choice(list(SexualPreference))
             sex = random.choice(list(Sex))
             height = random.choice([n for n in range(110, 200)])
             weight = random.choice([n for n in range(50, 150)])
-            fatpercentage = random.choice([n for n in range(1, 40)])
-            skinTone = random.choice(list(SkinTone))
-            hairColor = random.choice(list(HairColor))
+            fat_percentage = random.choice([n for n in range(1, 40)])
+            skin_tone = random.choice(list(SkinTone))
+            hair_color = random.choice(list(HairColor))
 
-            newPerson = Person(name, race, "empty", sexualPreference, sex, height, weight, fatpercentage, skinTone,
-                               hairColor)
-            self.group.append(newPerson)
+            new_person = Person(name, race, "empty", sexual_preference, sex, height, weight, fat_percentage, skin_tone,
+                               hair_color)
+            self.group.append(new_person)
 
         print(self.calculate_fitness())
 
