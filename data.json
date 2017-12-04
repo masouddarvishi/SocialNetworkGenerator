@@ -1,132 +1,115 @@
 {
-  "races": {
-    "white" : {
-      "percentageOfTotal" : 72,
-      "description":
-      {
-        "SexualPreference" :
-        {
-          "Heterosexual": 80,
-          "Homosexual": 15,
-          "Bisexual": 5
-        },
-        "Sex" :
-        {
-          "Male": 45,
-          "Female": 50,
-          "Other": 5
-        },
-        "SkinTone" :
-        {
-          "Light": 80,
-          "Medium": 15,
-          "Dark": 5
-        },
-        "HairColor" :
-        {
-          "Brown": 75,
-          "Dark": 10,
-          "Red": 5,
-          "Blonde": 5,
-          "White": 5
-        }
-      }
-    },
-    "black" : {
-      "percentageOfTotal" : 12,
-      "description":
-      {
-        "SexualPreference" :
-        {
-          "Heterosexual": 75,
-          "Homosexual": 10,
-          "Bisexual": 15
-        },
-        "Sex" :
-        {
-          "Male": 55,
-          "Female": 40,
-          "Other": 5
-        },
-        "SkinTone" :
-        {
-          "Light": 5,
-          "Medium": 15,
-          "Dark": 85
-        },
-        "HairColor" :
-        {
-          "Brown": 75,
-          "Dark": 10,
-          "Red": 0,
-          "Blonde": 5,
-          "White": 10
-        }
-      }
-    },
-    "Hispanic": {
-      "percentageOfTotal" : 4,
-      "description":
-      {
-        "SexualPreference" :
-        {
-          "Heterosexual": 60,
-          "Homosexual": 20,
-          "Bisexual": 20
-        },
-        "Sex" :
-        {
-          "Male": 60,
-          "Female": 30,
-          "Other": 10
-        },
-        "SkinTone" :
-        {
-          "Light": 5,
-          "Medium": 85,
-          "Dark": 10
-        },
-        "HairColor" :
-        {
-          "Brown": 5,
-          "Dark": 85,
-          "Red": 0,
-          "Blonde": 5,
-          "White": 5
-        }
-      }
-    },
-    "Asian": {
-      "percentageOfTotal" : 3,
-      "description":
-      {
-        "SexualPreference" :
-        {
-          "Heterosexual": 98,
-          "Homosexual": 1,
-          "Bisexual": 1
-        },
-        "Sex" :
-        {
-          "Male": 30,
-          "Female": 60,
-          "Other": 10
-        },
-        "SkinTone" :
-        {
-          "Light": 95,
-          "Medium": 5,
-          "Dark": 5
-        },
-        "HairColor" :
-        {
-          "Brown": 65,
-          "Dark": 10,
-          "Red": 10,
-          "Blonde": 5,
-          "White": 10
-        }
-      }
-    }
-  }
+	"races": [{
+			"race": "White",
+			"percentageOfTotal": 72,
+			"description": {
+				"SexualPreference": {
+					"Heterosexual": 80,
+					"Homosexual": 15,
+					"Bisexual": 5
+				},
+				"Sex": {
+					"Male": 45,
+					"Female": 50,
+					"Other": 5
+				},
+				"SkinTone": {
+					"Light": 80,
+					"Medium": 15,
+					"Dark": 5
+				},
+				"HairColor": {
+					"Brown": 75,
+					"Dark": 10,
+					"Red": 5,
+					"Blonde": 5,
+					"White": 5
+				}
+			}
+		},
+		{
+			"race": "Black",
+			"percentageOfTotal": 12,
+			"description": {
+				"SexualPreference": {
+					"Heterosexual": 75,
+					"Homosexual": 10,
+					"Bisexual": 15
+				},
+				"Sex": {
+					"Male": 55,
+					"Female": 40,
+					"Other": 5
+				},
+				"SkinTone": {
+					"Light": 5,
+					"Medium": 15,
+					"Dark": 85
+				},
+				"HairColor": {
+					"Brown": 75,
+					"Dark": 10,
+					"Red": 0,
+					"Blonde": 5,
+					"White": 10
+				}
+			}
+		},
+		{
+			"race": "Hispanic",
+			"percentageOfTotal": 4,
+			"description": {
+				"SexualPreference": {
+					"Heterosexual": 60,
+					"Homosexual": 20,
+					"Bisexual": 20
+				},
+				"Sex": {
+					"Male": 60,
+					"Female": 30,
+					"Other": 10
+				},
+				"SkinTone": {
+					"Light": 5,
+					"Medium": 85,
+					"Dark": 10
+				},
+				"HairColor": {
+					"Brown": 5,
+					"Dark": 85,
+					"Red": 0,
+					"Blonde": 5,
+					"White": 5
+				}
+			}
+		},
+		{
+			"race": "Asian",
+			"percentageOfTotal": 3,
+			"description": {
+				"SexualPreference": {
+					"Heterosexual": 98,
+					"Homosexual": 1,
+					"Bisexual": 1
+				},
+				"Sex": {
+					"Male": 30,
+					"Female": 60,
+					"Other": 10
+				},
+				"SkinTone": {
+					"Light": 95,
+					"Medium": 5,
+					"Dark": 5
+				},
+				"HairColor": {
+					"Brown": 65,
+					"Dark": 10,
+					"Red": 10,
+					"Blonde": 5,
+					"White": 10
+				}
+			}
+		}
+	]
 }
