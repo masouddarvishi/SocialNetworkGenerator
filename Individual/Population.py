@@ -35,6 +35,7 @@ class Population:
     def stats_per_race(self, race):
         """ Received a race as argument and returns data about the existent population"""
 
+        race = Population.cast_race_string(race)
         number_of_people = 1
         number_sexual_pref = {SexualPreference.HOMOSEXUAL: 0, SexualPreference.HETERO: 0, SexualPreference.BISEXUAL: 0}
         number_sex = {Sex.MALE: 0, Sex.FEMALE: 0, Sex.OTHER: 0}
@@ -82,12 +83,26 @@ class Population:
 
     def calculate_fitness(self):
 
-        #Stats by race
+        # Stats by race
         list_stats_by_race = []
         for race in self.statisticalObject.races:
             list_stats_by_race.append(self.stats_per_race(race.race))
 
+        
+
         return
+
+    @staticmethod
+    def cast_race_string(race):
+        """ Receives a string representing a race and converts it to a race enum"""
+        if race == "White":
+            return Race.WHITE
+        elif race == "Black":
+            return Race.BLACK
+        elif race == "Hispanic":
+            return Race.HISPANIC
+        else:
+            return Race.ASIAN
 
     def __str__(self):
         string_to_return = ''
