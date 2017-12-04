@@ -8,7 +8,7 @@ class GeneticAlgorithm:
 
         for i in range(0, 1):
             p = Population()
-            p.createRandomPopulation()
+            p.create_random_population()
             self.population.append(p)
 
     def print(self):
