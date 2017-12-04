@@ -1,7 +1,7 @@
 import secrets
 import random
 
-from Utils.Utils import JsonData
+from Utils.Utils import StatsClass
 from Individual.Person import *
 
 #TODO: Modify jsondata to contain the sizes of elements
@@ -12,7 +12,7 @@ class Population:
     def __init__(self):
         self.group = []
         self.fitness = 0
-        self.statisticalObject = JsonData("data.json")
+        self.statisticalObject = StatsClass("data.json")
 
     def createRandomPopulation(self):
         """ Creates a random population of 100 people"""
@@ -41,14 +41,14 @@ class Population:
 
     def calculate_fitness(self):
 
-        number_of_people_by_race = [0] * len(self.statisticalObject.races)
+        number_of_people_by_race = [0] * 3
         number_of_people_by_sexuality = [0] * 3
         number_of_people_by_sex = [0] * 3
 
-        for person in self.group:
-            number_of_people_by_race[person.race.value - 1] += 1
-            number_of_people_by_sexuality[person.sexualPreference-1] += 1
-            number_of_people_by_sex[person.sex-1] += 1
+        #for person in self.group:
+            #number_of_people_by_race[person.race.value - 1] += 1
+            #number_of_people_by_sexuality[person.sexualPreference.value-1] += 1
+            #[person.sex.value -1] += 1
 
 
         return
