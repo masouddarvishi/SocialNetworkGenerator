@@ -1,7 +1,7 @@
 import secrets
 import random
 
-from Utils.Utils import StatsClass
+from Utils.Utils import *
 from Individual.Person import *
 
 
@@ -52,29 +52,29 @@ class Population:
 
         population_statistics_by_race = {
             "race": race,
-            "percentageOfTotal": number_of_people / len(self.group),
+            "percentageOfPopulation": number_of_people / len(self.group),
             "description": {
                 "SexualPreference": {
-                    "Heterosexual": number_sexual_pref[SexualPreference.HETERO] / number_of_people,
-                    "Homosexual": number_sexual_pref[SexualPreference.HOMOSEXUAL] / number_of_people,
-                    "Bisexual": number_sexual_pref[SexualPreference.BISEXUAL] / number_of_people
+                    "Heterosexual": 100 * number_sexual_pref[SexualPreference.HETERO] / number_of_people,
+                    "Homosexual": 100 * number_sexual_pref[SexualPreference.HOMOSEXUAL] / number_of_people,
+                    "Bisexual": 100 * number_sexual_pref[SexualPreference.BISEXUAL] / number_of_people
                 },
                 "Sex": {
-                    "Male": number_sex[Sex.MALE] / number_of_people,
-                    "Female": number_sex[Sex.FEMALE] / number_of_people,
-                    "Other": number_sex[Sex.OTHER] / number_of_people
+                    "Male": 100 * number_sex[Sex.MALE] / number_of_people,
+                    "Female": 100 * number_sex[Sex.FEMALE] / number_of_people,
+                    "Other": 100 * number_sex[Sex.OTHER] / number_of_people
                 },
                 "SkinTone": {
-                    "Light": number_skin_tone[SkinTone.LIGHT] / number_of_people,
-                    "Medium": number_skin_tone[SkinTone.MEDIUM] / number_of_people,
-                    "Dark": number_skin_tone[SkinTone.DARK] / number_of_people
+                    "Light": 100 * number_skin_tone[SkinTone.LIGHT] / number_of_people,
+                    "Medium": 100 * number_skin_tone[SkinTone.MEDIUM] / number_of_people,
+                    "Dark": 100 * number_skin_tone[SkinTone.DARK] / number_of_people
                 },
                 "HairColor": {
-                    "Brown": number_hair_color[HairColor.BROWN] / number_of_people,
-                    "Dark": number_hair_color[HairColor.DARK] / number_of_people,
-                    "Red": number_hair_color[HairColor.RED] / number_of_people,
-                    "Blonde": number_hair_color[HairColor.BLONDE] / number_of_people,
-                    "White": number_hair_color[HairColor.WHITE] / number_of_people,
+                    "Brown": 100 * number_hair_color[HairColor.BROWN] / number_of_people,
+                    "Dark": 100 * number_hair_color[HairColor.DARK] / number_of_people,
+                    "Red": 100 * number_hair_color[HairColor.RED] / number_of_people,
+                    "Blonde": 100 * number_hair_color[HairColor.BLONDE] / number_of_people,
+                    "White": 100 * number_hair_color[HairColor.WHITE] / number_of_people,
                 }
             }
         }
@@ -83,14 +83,48 @@ class Population:
 
     def calculate_fitness(self):
 
+        fitness = 0
+
         # Stats by race
         list_stats_by_race = []
         for race in self.statisticalObject.races:
             list_stats_by_race.append(self.stats_per_race(race.race))
 
-        
+        # calculate fitness
+        for stats_seen in list_stats_by_race:
+            for real_stats in self.statisticalObject.races:
+                if stats_seen['race'] == Population.cast_race_string(real_stats.race):
+                    fitness += (1 - abs(stats_seen["percentageOfPopulation"] - (real_stats.percentageOfPopulation /
+                                                                                100)))
+                    fitness += Population.determine_distance(stats_seen["description"], real_stats)
 
-        return
+        self.fitness = fitness
+
+    @staticmethod
+    def determine_distance(object_seen, object_desired):
+
+        fitness = 0
+        weight_of_each_section = 1 / len(object_seen)
+
+        # Sexual Preference
+        sexual_pref_fitness = calculate_distance_between_dictionaries(object_seen["SexualPreference"],
+                                                                      object_desired.percentageOfSexualPreference)
+
+        # Sex
+        sex_fitness = calculate_distance_between_dictionaries(object_seen["Sex"], object_desired.percentageOfSex)
+
+        # Skin Tone
+        skin_tone_fitness = calculate_distance_between_dictionaries(object_seen["SkinTone"],
+                                                                    object_desired.percentageOfSkinTone)
+
+        # Hair Color
+        hair_color_fitness = calculate_distance_between_dictionaries(object_seen["HairColor"],
+                                                                     object_desired.percentageOfHairColor)
+
+        fitness += weight_of_each_section * sexual_pref_fitness + weight_of_each_section * sex_fitness\
+                   + weight_of_each_section * skin_tone_fitness + weight_of_each_section * hair_color_fitness
+
+        return fitness
 
     @staticmethod
     def cast_race_string(race):

@@ -1,7 +1,7 @@
 {
 	"races": [{
 			"race": "White",
-			"percentageOfTotal": 72,
+			"percentageOfPopulation": 72,
 			"description": {
 				"SexualPreference": {
 					"Heterosexual": 80,
@@ -29,7 +29,7 @@
 		},
 		{
 			"race": "Black",
-			"percentageOfTotal": 12,
+			"percentageOfPopulation": 12,
 			"description": {
 				"SexualPreference": {
 					"Heterosexual": 75,
@@ -57,7 +57,7 @@
 		},
 		{
 			"race": "Hispanic",
-			"percentageOfTotal": 4,
+			"percentageOfPopulation": 4,
 			"description": {
 				"SexualPreference": {
 					"Heterosexual": 60,
@@ -85,7 +85,7 @@
 		},
 		{
 			"race": "Asian",
-			"percentageOfTotal": 3,
+			"percentageOfPopulation": 3,
 			"description": {
 				"SexualPreference": {
 					"Heterosexual": 98,

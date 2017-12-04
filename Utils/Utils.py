@@ -12,23 +12,22 @@ class StatsClass:
 
         for race in data["races"]:
             new_race = RaceStat()
-            new_race.defineRace(race["race"], race["percentageOfTotal"])
+            new_race.defineRace(race["race"], race["percentageOfPopulation"])
             new_race.definePercentage(race["description"]["SexualPreference"], race["description"]["Sex"],
                                       race["description"]["SkinTone"], race["description"]["HairColor"])
             self.races.append(new_race)
-
 
 
 class RaceStat:
     """ Class that holds the stats for a determined race"""
 
     def __init__(self):
-        self.race = ""
-        self.percentageOfPopulation = 0
-        self.percentageOfSex = [0] * 3
-        self.percentageOfSexualPreference = [0] * 3
-        self.percentageOfSkinTone = [] * 3
-        self.percentageOfHairColor = [] * 5
+        self.race = None
+        self.percentageOfPopulation = None
+        self.percentageOfSex = None
+        self.percentageOfSexualPreference = None
+        self.percentageOfSkinTone = None
+        self.percentageOfHairColor = None
 
     def defineRace(self, race, percentageOfPop):
         """ Defines race and percentage of population"""
@@ -41,3 +40,16 @@ class RaceStat:
         self.percentageOfSex = percentageOfSex
         self.percentageOfSkinTone = skinTone
         self.percentageOfHairColor = hairColor
+
+
+def calculate_distance_between_dictionaries(firstDict, secondDict):
+
+    distance = 1
+    weight_for_each_key = 1 / len(firstDict.items())
+
+    for key_seen, value_seen in firstDict.items():
+        for key_desired, value_desired in secondDict.items():
+            if key_seen == key_desired:
+                distance -= weight_for_each_key * abs(value_seen - value_desired)
+
+    return distance
