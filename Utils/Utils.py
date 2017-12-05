@@ -53,3 +53,24 @@ def calculate_distance_between_dictionaries(firstDict, secondDict):
                 distance -= weight_for_each_key * abs(value_seen - value_desired)
 
     return distance
+
+
+def retrieve_max_fitness(populations):
+    """ Receives an array of individuals and retrieves a new population without the fittest element and
+    the fittest population"""
+
+    new_population = []
+    fittest_population = populations[0]
+
+    for population in populations:
+        if population == fittest_population:
+            continue
+        else:
+            if population.fitness > fittest_population.fitness:
+                fittest_population = population
+
+    populations = populations - fittest_population
+
+    new_population = [ pop for pop in populations]
+
+    return new_population, fittest_population

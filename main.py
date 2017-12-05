@@ -1,9 +1,16 @@
 from AlgGenetic.GeneticAlgorithm import GeneticAlgorithm
 
 
-def initiateGeneticPopulation():
-    galg = GeneticAlgorithm()
-    galg.print()
+def initiate_genetic_population():
+    genetic = GeneticAlgorithm()
+
+    i = 0
+    while i < 100:
+
+        genetic.determine_offspring()
+        i += 1
+
+    genetic.print()
 
 if __name__ == "__main__":
-    initiateGeneticPopulation()
+    initiate_genetic_population()
