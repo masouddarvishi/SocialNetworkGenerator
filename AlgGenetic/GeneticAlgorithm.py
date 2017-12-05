@@ -48,10 +48,6 @@ class GeneticAlgorithm:
                                                                                      size_of_population]
         offspring_2.group = first_mate.group[0: crossover_point] + second_mate.group[crossover_point + 1:
                                                                                      size_of_population]
-
-        offspring_1.calculate_fitness()
-        offspring_2.calculate_fitness()
-
         self.generation.append(offspring_1)
         self.generation.append(offspring_2)
 
@@ -67,7 +63,10 @@ class GeneticAlgorithm:
                     if rndvalue < (self.mutation_probability * 100):
                         pop.group[index_ind] = Population.create_random_person()
 
-
+    def calculate_all_fitness(self):
+        """ Responsible for calculating all the population's fitness """
+        for pop in self.generation:
+            pop.calculate_fitness()
 
     def print(self):
         for i in range(0, len(self.generation)):

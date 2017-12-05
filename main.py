@@ -7,11 +7,13 @@ def initiate_genetic_population():
 
     max_fit = None
     i = 0
-    while i < 1000:
+    while i < 10000:
 
         genetic.determine_new_generation_parents()
         genetic.determine_crossover()
         genetic.determine_mutation()
+
+        genetic.calculate_all_fitness()
 
         _, max_fit = Utils.retrieve_max_fitness(genetic.generation)
         #assert isinstance(max_fit, Population)
