@@ -16,21 +16,25 @@ class Population:
     def create_random_population(self):
         """ Creates a random population of 100 people"""
         for p in range(0, 300):
-            name = secrets.token_hex(5)
-            race = random.choice(list(Race))
-            sexual_preference = random.choice(list(SexualPreference))
-            sex = random.choice(list(Sex))
-            height = random.choice([n for n in range(110, 200)])
-            weight = random.choice([n for n in range(50, 150)])
-            fat_percentage = random.choice([n for n in range(1, 40)])
-            skin_tone = random.choice(list(SkinTone))
-            hair_color = random.choice(list(HairColor))
-
-            new_person = Person(name, race, "empty", sexual_preference, sex, height, weight, fat_percentage, skin_tone,
-                               hair_color)
+            new_person = Population.create_random_person()
             self.group.append(new_person)
 
-        print(self.calculate_fitness())
+    @staticmethod
+    def create_random_person(self):
+        name = secrets.token_hex(5)
+        race = random.choice(list(Race))
+        sexual_preference = random.choice(list(SexualPreference))
+        sex = random.choice(list(Sex))
+        height = random.choice([n for n in range(110, 200)])
+        weight = random.choice([n for n in range(50, 150)])
+        fat_percentage = random.choice([n for n in range(1, 40)])
+        skin_tone = random.choice(list(SkinTone))
+        hair_color = random.choice(list(HairColor))
+
+        new_person = Person(name, race, "empty", sexual_preference, sex, height, weight, fat_percentage, skin_tone,
+                            hair_color)
+
+        return new_person
 
     def stats_per_race(self, race):
         """ Received a race as argument and returns data about the existent population"""

@@ -59,7 +59,6 @@ def retrieve_max_fitness(populations):
     """ Receives an array of individuals and retrieves a new population without the fittest element and
     the fittest population"""
 
-    new_population = []
     fittest_population = populations[0]
 
     for population in populations:
@@ -69,8 +68,6 @@ def retrieve_max_fitness(populations):
             if population.fitness > fittest_population.fitness:
                 fittest_population = population
 
-    populations = populations - fittest_population
-
-    new_population = [ pop for pop in populations]
+    new_population = [pop for pop in populations if pop != fittest_population]
 
     return new_population, fittest_population
