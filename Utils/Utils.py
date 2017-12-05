@@ -1,5 +1,5 @@
 import json
-
+import math
 
 class StatsClass:
     """ Class that holds the stats read in the file"""
@@ -44,13 +44,14 @@ class RaceStat:
 
 def calculate_distance_between_dictionaries(firstDict, secondDict):
 
-    distance = 1
+    distance = 0
     weight_for_each_key = 1 / len(firstDict.items())
 
     for key_seen, value_seen in firstDict.items():
         for key_desired, value_desired in secondDict.items():
             if key_seen == key_desired:
-                distance -= weight_for_each_key * abs(value_seen - value_desired)
+                distance += weight_for_each_key * (1 - abs(value_desired - value_seen) /
+                                                   (math.sqrt(math.pow(value_desired,2) + math.pow(value_seen,2)) + 1))
 
     return distance
 

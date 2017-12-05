@@ -6,7 +6,7 @@ import random
 
 class GeneticAlgorithm:
 
-    def __init__(self, mutation_probability = 0.1):
+    def __init__(self, mutation_probability = 0.08):
 
         self.generation = []
         self.mutation_probability = mutation_probability

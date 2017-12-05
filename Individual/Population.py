@@ -98,8 +98,9 @@ class Population:
         for stats_seen in list_stats_by_race:
             for real_stats in self.statisticalObject.races:
                 if stats_seen['race'] == Population.cast_race_string(real_stats.race):
-                    fitness += (1 - abs(stats_seen["percentageOfPopulation"] - (real_stats.percentageOfPopulation /
-                                                                                100)))
+                    fitness += 1/5 * abs((real_stats.percentageOfPopulation / 100) - stats_seen["percentageOfPopulation"]) / \
+                               math.sqrt( math.pow(real_stats.percentageOfPopulation / 100, 2) +
+                                         math.pow(stats_seen["percentageOfPopulation"], 2))
                     fitness += Population.determine_distance(stats_seen["description"], real_stats)
 
         self.fitness = fitness
@@ -108,25 +109,24 @@ class Population:
     def determine_distance(object_seen, object_desired):
 
         fitness = 0
-        weight_of_each_section = 1 / len(object_seen)
+        weight_of_each_section = 1 / (len(object_seen) + 1)  # percentageOfPopulation is a section
 
         # Sexual Preference
-        sexual_pref_fitness = calculate_distance_between_dictionaries(object_seen["SexualPreference"],
+        sexual_pref_fitness = weight_of_each_section * calculate_distance_between_dictionaries(object_seen["SexualPreference"],
                                                                       object_desired.percentageOfSexualPreference)
 
         # Sex
-        sex_fitness = calculate_distance_between_dictionaries(object_seen["Sex"], object_desired.percentageOfSex)
+        sex_fitness = weight_of_each_section * calculate_distance_between_dictionaries(object_seen["Sex"], object_desired.percentageOfSex)
 
         # Skin Tone
-        skin_tone_fitness = calculate_distance_between_dictionaries(object_seen["SkinTone"],
+        skin_tone_fitness = weight_of_each_section * calculate_distance_between_dictionaries(object_seen["SkinTone"],
                                                                     object_desired.percentageOfSkinTone)
 
         # Hair Color
-        hair_color_fitness = calculate_distance_between_dictionaries(object_seen["HairColor"],
+        hair_color_fitness = weight_of_each_section * calculate_distance_between_dictionaries(object_seen["HairColor"],
                                                                      object_desired.percentageOfHairColor)
 
-        fitness += weight_of_each_section * sexual_pref_fitness + weight_of_each_section * sex_fitness\
-                   + weight_of_each_section * skin_tone_fitness + weight_of_each_section * hair_color_fitness
+        fitness += sexual_pref_fitness + sex_fitness + skin_tone_fitness + hair_color_fitness
 
         return fitness
 
