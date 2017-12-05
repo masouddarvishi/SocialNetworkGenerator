@@ -6,15 +6,16 @@ import random
 
 class GeneticAlgorithm:
 
-    def __init__(self):
+    def __init__(self, mutation_probability = 0.1):
 
-        self.population = []
+        self.generation = []
+        self.mutation_probability = mutation_probability
 
         for i in range(0, 4):
             p = Population()
             p.create_random_population()
             p.calculate_fitness()
-            self.population.append(p)
+            self.generation.append(p)
 
     def determine_new_generation_parents(self):
         """ Responsible for the selection of the fittest"""
@@ -22,21 +23,21 @@ class GeneticAlgorithm:
         next_generation = []
 
         # Selection
-        new_population_temp, fittest = retrieve_max_fitness(self.population)
+        new_population_temp, fittest = retrieve_max_fitness(self.generation)
         _, second_fittest = retrieve_max_fitness(new_population_temp)
 
         next_generation.append(fittest)
         next_generation.append(second_fittest)
 
-        self.population = next_generation
+        self.generation = next_generation
 
     def determine_crossover(self):
         """ Chooses a random crossover point and creates the offspring"""
 
-        size_of_population = len(self.population[0].group)
+        size_of_population = len(self.generation[0].group)
 
         crossover_point = random.randint(0, size_of_population)
-        first_mate, second_mate = self.population[0], self.population[1]
+        first_mate, second_mate = self.generation[0], self.generation[1]
 
         assert isinstance(first_mate, Population)
         assert isinstance(second_mate, Population)
@@ -51,9 +52,23 @@ class GeneticAlgorithm:
         offspring_1.calculate_fitness()
         offspring_2.calculate_fitness()
 
-        self.population.append(offspring_1)
-        self.population.append(offspring_2)
+        self.generation.append(offspring_1)
+        self.generation.append(offspring_2)
+
+    def determine_mutation(self):
+        """ Generates a new random person as a result of the mutation"""
+        assert isinstance(self.generation, list)
+
+        for indx, pop in enumerate(self.generation):
+            if indx > (len(self.generation)/2):
+                # if offspring
+                for index_ind, individual in enumerate(pop.group):
+                    rndvalue = random.randint(0, 100)
+                    if rndvalue < (self.mutation_probability * 100):
+                        pop.group[index_ind] = Population.create_random_person()
+
+
 
     def print(self):
-        for i in range(0, len(self.population)):
-            print(self.population[i])
+        for i in range(0, len(self.generation)):
+            print(self.generation[i])

@@ -20,7 +20,7 @@ class Population:
             self.group.append(new_person)
 
     @staticmethod
-    def create_random_person(self):
+    def create_random_person():
         name = secrets.token_hex(5)
         race = random.choice(list(Race))
         sexual_preference = random.choice(list(SexualPreference))
