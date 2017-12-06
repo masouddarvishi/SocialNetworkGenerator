@@ -98,9 +98,8 @@ class Population:
         for stats_seen in list_stats_by_race:
             for real_stats in self.statisticalObject.races:
                 if stats_seen['race'] == Population.cast_race_string(real_stats.race):
-                    fitness += 1/5 * abs((real_stats.percentageOfPopulation / 100) - stats_seen["percentageOfPopulation"]) / \
-                               math.sqrt( math.pow(real_stats.percentageOfPopulation / 100, 2) +
-                                         math.pow(stats_seen["percentageOfPopulation"], 2))
+                    fitness += 1/5 * math.sqrt(
+                        math.pow((real_stats.percentageOfPopulation / 100) - stats_seen["percentageOfPopulation"], 2))
                     fitness += Population.determine_distance(stats_seen["description"], real_stats)
 
         self.fitness = fitness

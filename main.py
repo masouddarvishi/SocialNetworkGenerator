@@ -5,9 +5,8 @@ from Utils import Utils
 def initiate_genetic_population():
     genetic = GeneticAlgorithm()
 
-    max_fit = None
     i = 0
-    while i <= 10000:
+    while i < 100000:
 
         genetic.determine_new_generation_parents()
         genetic.determine_crossover()
@@ -18,6 +17,9 @@ def initiate_genetic_population():
         _, max_fit = Utils.retrieve_max_fitness(genetic.generation)
 
         print(str(i) + ":" + str(max_fit.fitness))
+
+        if max_fit.fitness <= 50:
+            break
 
         i += 1
 
