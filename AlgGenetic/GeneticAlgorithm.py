@@ -31,40 +31,50 @@ class GeneticAlgorithm:
             sum_of_fitness_by_index.append(sum_of_fitness)
 
         while len(next_generation) < len(self.generation)/2:
-
             random_int = random.randint(0, int(sum_of_fitness))
 
             for index in range(len(sum_of_fitness_by_index)):
                 if random_int <= sum_of_fitness_by_index[index]:
                     next_generation.append(self.generation[index])
 
-
         self.generation = next_generation
 
     def determine_crossover(self):
-        """ Chooses a random crossover point and creates the offspring"""
+        """ Creates a new offspring with bias"""
 
-        size_of_population = len(self.generation[0].group)
+        new_generation_size = len(self.generation)
 
-        crossover_point = random.randint(0, size_of_population)
-        first_mate, second_mate = self.generation[0], self.generation[1]
+        # Bias uniform crossover
+        for index in range(0, new_generation_size, 2):
+           # print(str(index) + '____' + str(len(self.generation)))
+            first_mate, second_mate = self.generation[index], self.generation[index + 1]
+            offspring_1, offspring_2 = Population(), Population()
 
-        assert isinstance(first_mate, Population)
-        assert isinstance(second_mate, Population)
+            assert isinstance(first_mate, Population)
+            assert isinstance(second_mate, Population)
 
-        offspring_1, offspring_2 = Population(), Population()
+            # bias
+            frst_m_prb = 0.6 if first_mate.fitness > second_mate.fitness else 0.4
 
-        offspring_1.group = second_mate.group[:crossover_point] + first_mate.group[crossover_point:]
-        offspring_2.group = first_mate.group[:crossover_point] + second_mate.group[crossover_point + 1:]
-        self.generation.append(offspring_1)
-        self.generation.append(offspring_2)
+            for chrom in range(0, len(first_mate.group)):
+                # first offspring
+                rnd = random.uniform(0.0, 1.0)
+                offspring_1.group.append(first_mate.group[chrom] if rnd <= frst_m_prb else second_mate.group[chrom])
+
+                #second offspring
+                rnd = random.randrange(0, 1)
+                offspring_2.group.append(first_mate.group[chrom] if rnd <= frst_m_prb else second_mate.group[chrom])
+
+            self.generation.append(offspring_1)
+            self.generation.append(offspring_2)
+
 
     def determine_mutation(self):
         """ Generates a new random person as a result of the mutation"""
         assert isinstance(self.generation, list)
 
         for indx, pop in enumerate(self.generation):
-            if indx > (len(self.generation)/2):
+            if indx >= (len(self.generation)/2):
                 # if offspring
                 for index_ind, individual in enumerate(pop.group):
                     rnd_value = random.randint(0, 100)
