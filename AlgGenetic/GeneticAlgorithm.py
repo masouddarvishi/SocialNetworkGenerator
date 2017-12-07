@@ -20,6 +20,8 @@ class GeneticAlgorithm:
     def determine_new_generation_parents(self):
         """ Responsible for the selection of the fittest"""
 
+        print("Parents B: " + str(len(self.generation)))
+
         next_generation = []
         sum_of_fitness = 0
         sum_of_fitness_by_index = []
@@ -30,7 +32,7 @@ class GeneticAlgorithm:
             sum_of_fitness += pop.fitness
             sum_of_fitness_by_index.append(sum_of_fitness)
 
-        while len(next_generation) < len(self.generation)/2:
+        while len(next_generation) < 2:#len(self.generation)/2:
             random_int = random.randint(0, int(sum_of_fitness))
 
             for index in range(len(sum_of_fitness_by_index)):
@@ -39,14 +41,16 @@ class GeneticAlgorithm:
 
         self.generation = next_generation
 
+        print("Parents E: " + str(len(self.generation)))
+
     def determine_crossover(self):
         """ Creates a new offspring with bias"""
 
         new_generation_size = len(self.generation)
-
         # Bias uniform crossover
         for index in range(0, new_generation_size, 2):
            # print(str(index) + '____' + str(len(self.generation)))
+            #print(index)
             first_mate, second_mate = self.generation[index], self.generation[index + 1]
             offspring_1, offspring_2 = Population(), Population()
 
