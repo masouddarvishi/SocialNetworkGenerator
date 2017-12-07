@@ -21,6 +21,7 @@ class Population:
 
     @staticmethod
     def create_random_person():
+
         name = secrets.token_hex(5)
         race = random.choice(list(Race))
         sexual_preference = random.choice(list(SexualPreference))
@@ -84,50 +85,6 @@ class Population:
         }
 
         return population_statistics_by_race
-
-    def calculate_fitness(self):
-
-        fitness = 0
-
-        # Stats by race
-        list_stats_by_race = []
-        for race in self.statisticalObject.races:
-            list_stats_by_race.append(self.stats_per_race(race.race))
-
-        # calculate fitness
-        for stats_seen in list_stats_by_race:
-            for real_stats in self.statisticalObject.races:
-                if stats_seen['race'] == Population.cast_race_string(real_stats.race):
-                    fitness += 1/5 * math.sqrt(
-                        math.pow((real_stats.percentageOfPopulation / 100) - stats_seen["percentageOfPopulation"], 2))
-                    fitness += Population.determine_distance(stats_seen["description"], real_stats)
-
-        self.fitness = fitness
-
-    @staticmethod
-    def determine_distance(object_seen, object_desired):
-
-        fitness = 0
-        weight_of_each_section = 1 / (len(object_seen) + 1)  # percentageOfPopulation is a section
-
-        # Sexual Preference
-        sexual_pref_fitness = weight_of_each_section * calculate_distance_between_dictionaries(object_seen["SexualPreference"],
-                                                                      object_desired.percentageOfSexualPreference)
-
-        # Sex
-        sex_fitness = weight_of_each_section * calculate_distance_between_dictionaries(object_seen["Sex"], object_desired.percentageOfSex)
-
-        # Skin Tone
-        skin_tone_fitness = weight_of_each_section * calculate_distance_between_dictionaries(object_seen["SkinTone"],
-                                                                    object_desired.percentageOfSkinTone)
-
-        # Hair Color
-        hair_color_fitness = weight_of_each_section * calculate_distance_between_dictionaries(object_seen["HairColor"],
-                                                                     object_desired.percentageOfHairColor)
-
-        fitness += sexual_pref_fitness + sex_fitness + skin_tone_fitness + hair_color_fitness
-
-        return fitness
 
     @staticmethod
     def cast_race_string(race):

@@ -14,7 +14,6 @@ class GeneticAlgorithm:
         for i in range(0, 4):
             p = Population()
             p.create_random_population()
-            p.calculate_fitness()
             self.generation.append(p)
 
     def determine_new_generation_parents(self):
@@ -88,7 +87,7 @@ class GeneticAlgorithm:
     def calculate_all_fitness(self):
         """ Responsible for calculating all the population's fitness """
         for pop in self.generation:
-            pop.calculate_fitness()
+            pass#pop.calculate_fitness()
 
     def print(self):
         for i in range(0, len(self.generation)):
